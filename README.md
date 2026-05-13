@@ -126,20 +126,6 @@ BVSOP-MADRL/
 
 ---
 
-## 💻 System Requirements
-
-| Component  | Minimum                                 | Recommended             |
-| ---------- | --------------------------------------- | ----------------------- |
-| Python     | 3.10                                    | 3.11                    |
-| RAM        | 8 GB                                    | 16 GB                   |
-| GPU        | None (CPU works)                        | CUDA-capable NVIDIA GPU |
-| Disk Space | 2 GB                                    | 5 GB                    |
-| OS         | Windows 10/11, macOS 12+, Ubuntu 20.04+ | Any of the above        |
-
-> **GPU Note:** The code automatically detects and uses a CUDA GPU if available via `torch.device("cuda" if torch.cuda.is_available() else "cpu")`. Training on CPU is fully supported but roughly 3–5× slower.
-
----
-
 ## ⚙️ Environment Setup
 
 ### Windows
