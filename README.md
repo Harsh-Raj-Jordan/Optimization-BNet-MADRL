@@ -677,7 +677,7 @@ jupyter notebook
 
 ---
 
-## 📚 Research Background (For Juniors)
+## 📚 Research Background
 
 If you are new to this topic, here is a quick mental model for each technology used:
 
