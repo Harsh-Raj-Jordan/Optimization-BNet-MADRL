@@ -1,5 +1,8 @@
 # 🏥 BVSOP-MADRL — Blockchain Validator Selection & Optimization via Multi-Agent Deep Reinforcement Learning
 
+> **Based on:** _"Optimized Blockchain-Based Healthcare Framework Empowered by Mixed Multi-Agent Reinforcement Learning"_
+> Al-Marridi, A.Z., Mohamed, A., Erbad, A. — _Journal of Network and Computer Applications_, 224 (2024) 103834
+
 ---
 
 ## 📑 Table of Contents
@@ -18,11 +21,10 @@
 9. [Code Architecture](#-code-architecture)
 10. [Training the Agents](#-training-the-agents)
 11. [Testing & Evaluation](#-testing--evaluation)
-12. [Result Analysis](#-result-analysis)
-13. [Saved Models](#-saved-models)
-14. [Troubleshooting](#-troubleshooting)
-15. [Research Background (For Juniors)](#-research-background-for-juniors)
-16. [Glossary](#-glossary)
+12. [Saved Models](#-saved-models)
+13. [Troubleshooting](#-troubleshooting)
+14. [Research Background (For Juniors)](#-research-background-for-juniors)
+15. [Glossary](#-glossary)
 
 ---
 
@@ -40,11 +42,11 @@ Imagine multiple hospitals, pharmacies, insurance companies, and the Ministry of
 
 Every time a participant wants to send a data block, they must decide **three things simultaneously**:
 
-| Decision | Effect |
-|---|---|
-| **How many transactions** to pack into one block | More → higher latency, lower cost per transaction |
-| **How many validators** to involve | More → more secure, but slower and more expensive |
-| **Whether to compress** the data | Compression → faster, but only appropriate for urgent (non-sensitive) data |
+| Decision                                         | Effect                                                                     |
+| ------------------------------------------------ | -------------------------------------------------------------------------- |
+| **How many transactions** to pack into one block | More → higher latency, lower cost per transaction                          |
+| **How many validators** to involve               | More → more secure, but slower and more expensive                          |
+| **Whether to compress** the data                 | Compression → faster, but only appropriate for urgent (non-sensitive) data |
 
 Minimizing latency, maximizing security, and minimizing cost are **fundamentally conflicting**. You cannot optimize all three perfectly at the same time.
 
@@ -129,13 +131,13 @@ BVSOP-MADRL/
 
 ## 💻 System Requirements
 
-| Component | Minimum | Recommended |
-|---|---|---|
-| Python | 3.10 | 3.11 |
-| RAM | 8 GB | 16 GB |
-| GPU | None (CPU works) | CUDA-capable NVIDIA GPU |
-| Disk Space | 2 GB | 5 GB |
-| OS | Windows 10/11, macOS 12+, Ubuntu 20.04+ | Any of the above |
+| Component  | Minimum                                 | Recommended             |
+| ---------- | --------------------------------------- | ----------------------- |
+| Python     | 3.10                                    | 3.11                    |
+| RAM        | 8 GB                                    | 16 GB                   |
+| GPU        | None (CPU works)                        | CUDA-capable NVIDIA GPU |
+| Disk Space | 2 GB                                    | 5 GB                    |
+| OS         | Windows 10/11, macOS 12+, Ubuntu 20.04+ | Any of the above        |
 
 > **GPU Note:** The code automatically detects and uses a CUDA GPU if available via `torch.device("cuda" if torch.cuda.is_available() else "cpu")`. Training on CPU is fully supported but roughly 3–5× slower.
 
@@ -148,38 +150,44 @@ BVSOP-MADRL/
 **Step 1 — Install Python 3.11**
 
 Download the installer from [python.org](https://www.python.org/downloads/). During installation:
+
 - ✅ Check **"Add Python to PATH"**
 - ✅ Check **"Install for all users"**
 
 Verify in PowerShell:
+
 ```powershell
 python --version
 # Expected: Python 3.11.x
 ```
 
 **Step 2 — Clone or download the repository**
+
 ```powershell
 # If you have git installed:
-git clone https://github.com/your-username/BVSOP-MADRL.git
-cd BVSOP-MADRL
+git clone https://github.com/Harsh-Raj-Jordan/Optimization-BNet-MADRL.git
+cd Optimization-BNet-MADRL
 
 # OR simply download the ZIP from GitHub and extract it, then open PowerShell inside the folder.
 ```
 
 **Step 3 — Create a virtual environment**
+
 ```powershell
 python -m venv venv
 venv\Scripts\activate
-# Your prompt should now show: (venv) PS C:\...\BVSOP-MADRL>
+# Your prompt should now show: (venv) PS C:\...\Optimization-BNet-MADRL>
 ```
 
 **Step 4 — Install dependencies**
+
 ```powershell
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
 **Step 5 — (Optional) Install Jupyter**
+
 ```powershell
 pip install jupyter notebook ipykernel
 python -m ipykernel install --user --name=bvsop-env --display-name "BVSOP MADRL"
@@ -190,42 +198,49 @@ python -m ipykernel install --user --name=bvsop-env --display-name "BVSOP MADRL"
 ### macOS (Apple Silicon & Intel)
 
 **Step 1 — Install Homebrew and Python**
+
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install python@3.11
 ```
 
 Verify:
+
 ```bash
 python3.11 --version
 # Expected: Python 3.11.x
 ```
 
 **Step 2 — Clone the repository**
+
 ```bash
-git clone https://github.com/your-username/BVSOP-MADRL.git
-cd BVSOP-MADRL
+git clone https://github.com/Harsh-Raj-Jordan/Optimization-BNet-MADRL.git
+cd Optimization-BNet-MADRL
 ```
 
 **Step 3 — Create a virtual environment**
+
 ```bash
 python3.11 -m venv venv
 source venv/bin/activate
-# Your prompt should now show: (venv) user@machine BVSOP-MADRL %
+# Your prompt should now show: (venv) user@machine Optimization-BNet-MADRL %
 ```
 
 **Step 4 — Install dependencies**
+
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
 > **Apple Silicon (M1/M2/M3) Note:** PyTorch supports Apple's Metal Performance Shaders (MPS) backend. The code uses CUDA detection, but MPS will not auto-activate. If you want GPU acceleration on Apple Silicon, change the device line in the notebook:
+>
 > ```python
 > device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 > ```
 
 **Step 5 — (Optional) Install Jupyter**
+
 ```bash
 pip install jupyter notebook ipykernel
 python -m ipykernel install --user --name=bvsop-env --display-name "BVSOP MADRL"
@@ -236,29 +251,34 @@ python -m ipykernel install --user --name=bvsop-env --display-name "BVSOP MADRL"
 ### Linux (Ubuntu/Debian)
 
 **Step 1 — Install Python and build tools**
+
 ```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install python3.11 python3.11-venv python3.11-dev build-essential git -y
 ```
 
 Verify:
+
 ```bash
 python3.11 --version
 ```
 
 **Step 2 — Clone the repository**
+
 ```bash
-git clone https://github.com/your-username/BVSOP-MADRL.git
-cd BVSOP-MADRL
+git clone https://github.com/Harsh-Raj-Jordan/Optimization-BNet-MADRL.git
+cd Optimization-BNet-MADRL
 ```
 
 **Step 3 — Create a virtual environment**
+
 ```bash
 python3.11 -m venv venv
 source venv/bin/activate
 ```
 
 **Step 4 — Install dependencies**
+
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
@@ -267,6 +287,7 @@ pip install -r requirements.txt
 **Step 5 — (Optional) CUDA Setup for NVIDIA GPU**
 
 First verify your CUDA version:
+
 ```bash
 nvidia-smi
 # Note the "CUDA Version" shown in the top-right corner
@@ -275,6 +296,7 @@ nvidia-smi
 If CUDA 12.x is available, PyTorch from `requirements.txt` should work. If you need a specific CUDA build, visit [pytorch.org/get-started](https://pytorch.org/get-started/locally/) and replace the torch line accordingly.
 
 **Step 6 — (Optional) Install Jupyter**
+
 ```bash
 pip install jupyter notebook ipykernel
 python -m ipykernel install --user --name=bvsop-env --display-name "BVSOP MADRL"
@@ -295,9 +317,11 @@ source venv/bin/activate
 ```
 
 **Step 2 — Launch Jupyter**
+
 ```bash
 jupyter notebook
 ```
+
 This opens a browser tab at `http://localhost:8888`.
 
 **Step 3 — Open the notebook**
@@ -314,15 +338,15 @@ If you skipped the ipykernel installation step, select any available Python 3 ke
 
 The notebook is divided into the following sections. Run them **top to bottom**:
 
-| Section | What it Does |
-|---|---|
-| **Cell 1: Configuration & Imports** | Sets all hyperparameters, imports libraries, defines the `XI_VECTOR` of validator compute powers |
-| **Cell 2: Environment (`IPHealthChainEnv`)** | Defines the simulation world — queues, validators, state transitions, reward computation |
-| **Cell 3: Neural Network (`BranchingDuelingDQN`)** | Defines the Dueling DQN architecture with separate heads for each action sub-space |
-| **Cell 4: Agents** | Defines MAD3QN, RS (Random), SB (Static), and ES (Exhaustive Search) agents |
-| **Cell 5: Training Loop** | Runs the main training, saves `.pth` model files, records history |
-| **Cell 6: Evaluation** | Loads a saved model and runs inference on a fixed environment |
-| **Cell 7: Plotting** | Generates all result visualizations |
+| Section                                            | What it Does                                                                                     |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Cell 1: Configuration & Imports**                | Sets all hyperparameters, imports libraries, defines the `XI_VECTOR` of validator compute powers |
+| **Cell 2: Environment (`IPHealthChainEnv`)**       | Defines the simulation world — queues, validators, state transitions, reward computation         |
+| **Cell 3: Neural Network (`BranchingDuelingDQN`)** | Defines the Dueling DQN architecture with separate heads for each action sub-space               |
+| **Cell 4: Agents**                                 | Defines MAD3QN, RS (Random), SB (Static), and ES (Exhaustive Search) agents                      |
+| **Cell 5: Training Loop**                          | Runs the main training, saves `.pth` model files, records history                                |
+| **Cell 6: Evaluation**                             | Loads a saved model and runs inference on a fixed environment                                    |
+| **Cell 7: Plotting**                               | Generates all result visualizations                                                              |
 
 > **Tip:** Use `Kernel → Restart & Run All` for a clean full run. Expected training time: ~15–30 minutes on CPU for 3500 episodes.
 
@@ -337,6 +361,7 @@ Download from [code.visualstudio.com](https://code.visualstudio.com/).
 **Step 2 — Install required extensions**
 
 Open VS Code, press `Ctrl+Shift+X` (or `Cmd+Shift+X` on Mac), and install:
+
 - **Python** (by Microsoft)
 - **Jupyter** (by Microsoft)
 
@@ -349,6 +374,7 @@ File → Open Folder → select the BVSOP-MADRL folder
 **Step 4 — Select the Python interpreter**
 
 Press `Ctrl+Shift+P` → type `Python: Select Interpreter` → choose the one that shows `venv` in its path, e.g.:
+
 - Windows: `.\venv\Scripts\python.exe`
 - macOS/Linux: `./venv/bin/python`
 
@@ -368,66 +394,66 @@ All parameters are defined in the `CONFIG` dictionary at the top of the notebook
 
 ### Blockchain & Physics Parameters
 
-| Parameter | Default | Meaning |
-|---|---|---|
-| `w` | `0.5e6` Hz | Channel bandwidth |
-| `SNR_d_db` | `10` dB | Downlink signal-to-noise ratio |
-| `SNR_u_db` | `12` dB | Uplink signal-to-noise ratio |
-| `r_d` | `1.2e6` bps | Downlink transmission rate (BM → Validators) |
-| `r_u` | `1.3e6` bps | Uplink transmission rate (Validators → BM) |
-| `xi_hat` | `0.5e6` bits | Verification feedback size (ξ̂) |
-| `zeta` | `500` bytes | Average transaction size (ζ) |
-| `q` | `4.0` | Network scale indicator for security function |
-| `kappa` | `1.0` | Security coefficient (κ) |
-| `psi` | `0.001` | Consensus latency coefficient (ψ) |
-| `G_required` | `100.0` | Computation required for block verification (K) |
+| Parameter    | Default      | Meaning                                         |
+| ------------ | ------------ | ----------------------------------------------- |
+| `w`          | `0.5e6` Hz   | Channel bandwidth                               |
+| `SNR_d_db`   | `10` dB      | Downlink signal-to-noise ratio                  |
+| `SNR_u_db`   | `12` dB      | Uplink signal-to-noise ratio                    |
+| `r_d`        | `1.2e6` bps  | Downlink transmission rate (BM → Validators)    |
+| `r_u`        | `1.3e6` bps  | Uplink transmission rate (Validators → BM)      |
+| `xi_hat`     | `0.5e6` bits | Verification feedback size (ξ̂)                  |
+| `zeta`       | `500` bytes  | Average transaction size (ζ)                    |
+| `q`          | `4.0`        | Network scale indicator for security function   |
+| `kappa`      | `1.0`        | Security coefficient (κ)                        |
+| `psi`        | `0.001`      | Consensus latency coefficient (ψ)               |
+| `G_required` | `100.0`      | Computation required for block verification (K) |
 
 ### System Scale Parameters
 
-| Parameter | Default | Meaning |
-|---|---|---|
-| `T_r` / `X_max` | `500` | Maximum transactions per block |
-| `M` | `40` | Total number of available validators |
-| `N_agents` | `2` | Number of intelligent participants (hospitals) |
+| Parameter       | Default | Meaning                                        |
+| --------------- | ------- | ---------------------------------------------- |
+| `T_r` / `X_max` | `500`   | Maximum transactions per block                 |
+| `M`             | `40`    | Total number of available validators           |
+| `N_agents`      | `2`     | Number of intelligent participants (hospitals) |
 
 > **Switching Settings:** To reproduce the paper's "Setting 1" (M=25), change `"M": 40` → `"M": 25` and uncomment the `XI_VECTOR` for M=25. The code will automatically use the correct pre-trained model file (`_M25.pth`).
 
 ### Reward Weighting Parameters
 
-| Parameter | Default | Meaning |
-|---|---|---|
-| `alpha` | `0.33` | Weight for latency objective |
-| `beta` | `0.33` | Weight for security objective |
-| `gamma` | `0.34` | Weight for cost objective |
-| `delta` | `0.2` | Global vs local reward balance (0=fully competitive, 1=fully cooperative) |
+| Parameter | Default | Meaning                                                                   |
+| --------- | ------- | ------------------------------------------------------------------------- |
+| `alpha`   | `0.33`  | Weight for latency objective                                              |
+| `beta`    | `0.33`  | Weight for security objective                                             |
+| `gamma`   | `0.34`  | Weight for cost objective                                                 |
+| `delta`   | `0.2`   | Global vs local reward balance (0=fully competitive, 1=fully cooperative) |
 
 ### Application-Level Thresholds
 
-| Parameter | Default | Meaning |
-|---|---|---|
-| `u_th` | `0.5` | Urgency threshold for compression eligibility |
-| `a_th` | `5` | Maximum allowed queuing time (zombie threshold) |
-| `l_p` | `0.5` | Latency penalty coefficient |
-| `s_p` | `0.5` | Security penalty coefficient |
-| `d_p` | `0.5` | Wrong compression decision penalty |
-| `U_p` | `0.5` | Insufficient resource utilization penalty |
-| `epsilon_error` | `0.2` | Accepted security error margin (ε) |
+| Parameter       | Default | Meaning                                         |
+| --------------- | ------- | ----------------------------------------------- |
+| `u_th`          | `0.5`   | Urgency threshold for compression eligibility   |
+| `a_th`          | `5`     | Maximum allowed queuing time (zombie threshold) |
+| `l_p`           | `0.5`   | Latency penalty coefficient                     |
+| `s_p`           | `0.5`   | Security penalty coefficient                    |
+| `d_p`           | `0.5`   | Wrong compression decision penalty              |
+| `U_p`           | `0.5`   | Insufficient resource utilization penalty       |
+| `epsilon_error` | `0.2`   | Accepted security error margin (ε)              |
 
 ### RL Hyperparameters
 
-| Parameter | Default | Meaning |
-|---|---|---|
-| `LR` | `3e-4` | Learning rate for RMSprop optimizer |
-| `GAMMA` | `0.99` | Discount factor (λ) — how much to value future rewards |
-| `BATCH_SIZE` | `128` | Number of experiences sampled per learning step |
-| `MEMORY_SIZE` | `50000` | Replay buffer capacity |
-| `EPSILON_START` | `1.0` | Initial exploration rate (100% random actions) |
-| `EPSILON_END` | `0.01` | Final exploration rate (1% random actions) |
-| `EPSILON_DECAY` | `59500` | Number of steps to linearly decay epsilon |
-| `TAU` | `0.001` | Soft update rate for target network |
-| `EPISODES` | `3500` | Total training episodes |
-| `STEPS_PER_EP` | `20` | Environment steps per episode |
-| `HIDDEN_SIZE` | `512` | Neurons per hidden layer in the neural network |
+| Parameter       | Default | Meaning                                                |
+| --------------- | ------- | ------------------------------------------------------ |
+| `LR`            | `3e-4`  | Learning rate for RMSprop optimizer                    |
+| `GAMMA`         | `0.99`  | Discount factor (λ) — how much to value future rewards |
+| `BATCH_SIZE`    | `128`   | Number of experiences sampled per learning step        |
+| `MEMORY_SIZE`   | `50000` | Replay buffer capacity                                 |
+| `EPSILON_START` | `1.0`   | Initial exploration rate (100% random actions)         |
+| `EPSILON_END`   | `0.01`  | Final exploration rate (1% random actions)             |
+| `EPSILON_DECAY` | `59500` | Number of steps to linearly decay epsilon              |
+| `TAU`           | `0.001` | Soft update rate for target network                    |
+| `EPISODES`      | `3500`  | Total training episodes                                |
+| `STEPS_PER_EP`  | `20`    | Environment steps per episode                          |
+| `HIDDEN_SIZE`   | `512`   | Neurons per hidden layer in the neural network         |
 
 ---
 
@@ -453,6 +479,7 @@ IPHealthChainEnv
 **What is the observation vector?**
 
 Each agent sees a flattened vector containing:
+
 1. Its **transaction queue** — up to `X_max` transactions, each with `(urgency, security, queuing_time)` — shape `(X_max × 3,)`
 2. The **shared validator resources** — each validator's compute power normalized — shape `(M × 2,)`
 
@@ -489,18 +516,18 @@ Input: observation vector (1580-dim)
 
 **Why Dueling?** The dueling architecture separates the **value of a state** (V) from the **advantage of a specific action** (A). This makes learning more stable because the network can update the state-value estimate even when it doesn't take an action, allowing faster convergence.
 
-**Why Double DQN?** Standard DQN overestimates Q-values due to using the same network for both action selection and evaluation. Double DQN uses the **online network** to *select* the best action and the **target network** to *evaluate* it, eliminating this bias.
+**Why Double DQN?** Standard DQN overestimates Q-values due to using the same network for both action selection and evaluation. Double DQN uses the **online network** to _select_ the best action and the **target network** to _evaluate_ it, eliminating this bias.
 
 ---
 
 ### The Four Competing Agents
 
-| Agent | Strategy | Purpose |
-|---|---|---|
-| `MAD3QNAgent` | Learns optimal policy via experience replay + neural network | **Our proposed method** |
-| `RSAgent` | Picks actions uniformly at random | Lower-bound baseline; represents no intelligence |
-| `SBAgent` | Always picks the same fixed action | Baseline for zero-adaptation behavior |
-| `ESAgent` | Exhaustively evaluates all possible actions at each step | Near-optimal greedy baseline (infeasible at scale) |
+| Agent         | Strategy                                                     | Purpose                                            |
+| ------------- | ------------------------------------------------------------ | -------------------------------------------------- |
+| `MAD3QNAgent` | Learns optimal policy via experience replay + neural network | **Our proposed method**                            |
+| `RSAgent`     | Picks actions uniformly at random                            | Lower-bound baseline; represents no intelligence   |
+| `SBAgent`     | Always picks the same fixed action                           | Baseline for zero-adaptation behavior              |
+| `ESAgent`     | Exhaustively evaluates all possible actions at each step     | Near-optimal greedy baseline (infeasible at scale) |
 
 ---
 
@@ -524,6 +551,7 @@ Open the notebook and run all cells in order. Training begins at the cell labele
 ### Progress Monitoring
 
 Every 100 episodes, the console prints:
+
 ```
 Episode 100/3500 | H1 Reward: 45.2341 | H2 Reward: 44.8901 | Resources: 67.3%
 ```
@@ -533,6 +561,7 @@ Healthy training shows **gradually increasing rewards** and **increasing resourc
 ### Saved Outputs
 
 After training completes, two model files are saved:
+
 ```
 hospital_1_mad3qn_M40.pth   ← Agent 1's learned weights
 hospital_2_mad3qn_M40.pth   ← Agent 2's learned weights
@@ -565,102 +594,12 @@ Utility U: 0.7842311203479767
 ----------------------------------------------------------------------------------
 ```
 
-| Field | Meaning |
-|---|---|
-| `Selected` | Binary mask of length M — a `1` means that validator was chosen |
-| `m` | Number of validators selected for this block |
-| `n` | Number of transactions packed into this block |
-| `Utility U` | The final bipartite reward value (0–1 range, higher is better) |
-
----
-
-## 📊 Result Analysis
-
-### Training Reward Curve
-
-After training, plot the reward history to verify convergence:
-
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-window = 50
-for i in range(CONFIG["N_agents"]):
-    rewards = history["agent_rewards"][i]
-    smoothed = np.convolve(rewards, np.ones(window)/window, mode='valid')
-    plt.plot(smoothed, label=f"Hospital {i+1}")
-
-plt.xlabel("Training Episode")
-plt.ylabel("Average Reward per Step")
-plt.title(f"MAD3QN Training Convergence (M={CONFIG['M']})")
-plt.legend()
-plt.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.savefig(f"training_reward_M{CONFIG['M']}.png", dpi=150)
-plt.show()
-```
-
-**What to look for:**
-- Rewards should start low (~10–20) and climb to ~70–80
-- Both agents should converge to similar reward levels (cooperative behavior)
-- The curve should flatten and stabilize — that is convergence
-
-### Resource Utilization Over Training
-
-```python
-resources = history["resources"]
-smoothed_res = np.convolve(resources, np.ones(100)/100, mode='valid')
-plt.plot(smoothed_res, color='green')
-plt.axhline(y=100, color='red', linestyle='--', label='Max Resources')
-plt.xlabel("Training Episode")
-plt.ylabel("Resource Utilization (%)")
-plt.title("Computational Resource Utilization During Training")
-plt.legend()
-plt.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.show()
-```
-
-**What to look for:** Utilization should trend upward toward 100% as agents learn to cooperate in using the shared validator pool efficiently.
-
-### Comparing All Four Policies
-
-To reproduce the paper's benchmark comparison (Figure 5 in the paper), run all four agent types on the same fixed environment for 100 testing episodes and compare their accumulated rewards:
-
-```python
-policies = {
-    "MAD3QN": eval_agents,
-    "RS": [RSAgent(CONFIG, eval_env) for _ in range(CONFIG["N_agents"])],
-    "SB": [SBAgent(CONFIG, eval_env) for _ in range(CONFIG["N_agents"])],
-}
-
-results = {}
-TEST_EPISODES = 100
-
-for policy_name, policy_agents in policies.items():
-    all_rewards = []
-    for ep in range(TEST_EPISODES):
-        obs = eval_env.reset()
-        ep_reward = 0
-        for _ in range(CONFIG["STEPS_PER_EP"]):
-            actions = [a.select_action(obs[i]) for i, a in enumerate(policy_agents)]
-            obs, rewards, _, _ = eval_env.step(actions)
-            ep_reward += np.mean(rewards)
-        all_rewards.append(ep_reward / CONFIG["STEPS_PER_EP"])
-    results[policy_name] = all_rewards
-    print(f"{policy_name}: Avg Reward = {np.mean(all_rewards):.4f}")
-```
-
-### Interpreting Results Against the Paper
-
-| Metric | Paper Result | What It Means |
-|---|---|---|
-| MAD3QN avg reward | ~75 (small scale) | Best overall policy |
-| ES avg reward | ~41 | Good greedy baseline, but too slow for real use |
-| RS avg reward | ~21 | Random is surprisingly better than static |
-| SB avg reward | ~10.5 | Worst — blindly ignores all system state |
-| Latency reduction vs ES | up to 46.6% | In emergency (high-urgency) scenarios |
-| Average latency reduction | ~29.24% | Across all tested configurations |
+| Field       | Meaning                                                         |
+| ----------- | --------------------------------------------------------------- |
+| `Selected`  | Binary mask of length M — a `1` means that validator was chosen |
+| `m`         | Number of validators selected for this block                    |
+| `n`         | Number of transactions packed into this block                   |
+| `Utility U` | The final bipartite reward value (0–1 range, higher is better)  |
 
 ---
 
@@ -668,12 +607,12 @@ for policy_name, policy_agents in policies.items():
 
 Four pre-trained model files are included:
 
-| File | Setting | Agents | Episodes Trained |
-|---|---|---|---|
-| `hospital_1_mad3qn_M25.pth` | M=25 validators, Setting 1 | Agent 1 | 3500 |
-| `hospital_2_mad3qn_M25.pth` | M=25 validators, Setting 1 | Agent 2 | 3500 |
-| `hospital_1_mad3qn_M40.pth` | M=40 validators, Setting 2 | Agent 1 | 3500 |
-| `hospital_2_mad3qn_M40.pth` | M=40 validators, Setting 2 | Agent 2 | 3500 |
+| File                        | Setting                    | Agents  | Episodes Trained |
+| --------------------------- | -------------------------- | ------- | ---------------- |
+| `hospital_1_mad3qn_M25.pth` | M=25 validators, Setting 1 | Agent 1 | 3500             |
+| `hospital_2_mad3qn_M25.pth` | M=25 validators, Setting 1 | Agent 2 | 3500             |
+| `hospital_1_mad3qn_M40.pth` | M=40 validators, Setting 2 | Agent 1 | 3500             |
+| `hospital_2_mad3qn_M40.pth` | M=40 validators, Setting 2 | Agent 2 | 3500             |
 
 To load a specific model, update the path in the evaluation cell:
 
@@ -696,32 +635,42 @@ eval_agents[0].online_net.load_state_dict(
 ## 🔧 Troubleshooting
 
 ### `ModuleNotFoundError: No module named 'torch'`
+
 Your virtual environment is not activated. Run `source venv/bin/activate` (macOS/Linux) or `venv\Scripts\activate` (Windows) and retry.
 
 ### `FileNotFoundError: hospital_1_mad3qn_M40.pth`
+
 You are trying to load a model that hasn't been trained yet. Either run the training cell first, or ensure the `.pth` files from the repository are in the same directory as the notebook.
 
 ### CUDA errors like `RuntimeError: CUDA out of memory`
+
 Your GPU doesn't have enough VRAM. Add this line to force CPU usage:
+
 ```python
 device = torch.device("cpu")
 ```
 
 ### Notebook kernel crashes immediately
+
 This usually means insufficient RAM. Try reducing `MEMORY_SIZE` from `50000` to `20000` and `HIDDEN_SIZE` from `512` to `128`.
 
 ### Training reward stuck at ~10 and not improving
+
 Epsilon may be decaying too fast, or learning rate is too high. Try:
+
 ```python
 CONFIG["EPSILON_DECAY"] = 100000  # Slower decay
 CONFIG["LR"] = 1e-4               # Lower learning rate
 ```
 
 ### `ValueError: operands could not be broadcast together`
+
 This happens if `CONFIG["M"]` and the length of `XI_VECTOR` don't match. Make sure `XI_VECTOR` is sliced to `[:CONFIG["M"]]` — the code already does this, but verify no manual edits broke it.
 
 ### Jupyter not finding the venv kernel
+
 Re-register the kernel:
+
 ```bash
 source venv/bin/activate   # or venv\Scripts\activate on Windows
 pip install ipykernel
@@ -753,27 +702,27 @@ If you are new to this topic, here is a quick mental model for each technology u
 
 ## 📖 Glossary
 
-| Term | Definition |
-|---|---|
-| **IP** | Intelligent Participant — a hospital, pharmacy, etc. acting as a blockchain node |
-| **Validator** | A computational node that verifies blockchain transactions |
-| **Block** | A batch of transactions packaged together for blockchain submission |
-| **MOOP** | Multi-Objective Optimization Problem |
-| **MARL** | Multi-Agent Reinforcement Learning |
-| **MAD3QN** | Multi-Agent Dueling Double Deep Q-Network — the proposed algorithm |
-| **D3QN** | Dueling Double Deep Q-Network (single-agent version) |
-| **Dec-POMDP** | Decentralized Partially Observable Markov Decision Process |
-| **Bipartite Reward** | The paper's novel two-part reward (global + local) that enables implicit cooperation |
-| **Zombie Transaction** | A transaction that has been waiting longer than the threshold `a_th` and risks never being processed |
-| **Exhaustive Search (ES)** | A brute-force policy that evaluates all possible actions and picks the best — optimal but slow |
-| **Random Selection (RS)** | A policy that picks actions uniformly at random |
-| **Static-Based (SB)** | A policy that always picks the same fixed action regardless of state |
-| **DPoS** | Delegated Proof of Stake — the consensus mechanism used; validators are selected by computational resources |
-| **CSLR** | Cost-Security-Latency-Resource — the combined optimization objective of the system |
-| **ε-greedy** | Exploration strategy: with probability ε take a random action, otherwise take the best known action |
-| **Replay Buffer** | A memory bank storing past experiences `(state, action, reward, next_state)` for random sampling during training |
-| **Soft Update** | Slowly blending online network weights into the target network: `θ_target ← τ·θ_online + (1-τ)·θ_target` |
+| Term                       | Definition                                                                                                       |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **IP**                     | Intelligent Participant — a hospital, pharmacy, etc. acting as a blockchain node                                 |
+| **Validator**              | A computational node that verifies blockchain transactions                                                       |
+| **Block**                  | A batch of transactions packaged together for blockchain submission                                              |
+| **MOOP**                   | Multi-Objective Optimization Problem                                                                             |
+| **MARL**                   | Multi-Agent Reinforcement Learning                                                                               |
+| **MAD3QN**                 | Multi-Agent Dueling Double Deep Q-Network — the proposed algorithm                                               |
+| **D3QN**                   | Dueling Double Deep Q-Network (single-agent version)                                                             |
+| **Dec-POMDP**              | Decentralized Partially Observable Markov Decision Process                                                       |
+| **Bipartite Reward**       | The paper's novel two-part reward (global + local) that enables implicit cooperation                             |
+| **Zombie Transaction**     | A transaction that has been waiting longer than the threshold `a_th` and risks never being processed             |
+| **Exhaustive Search (ES)** | A brute-force policy that evaluates all possible actions and picks the best — optimal but slow                   |
+| **Random Selection (RS)**  | A policy that picks actions uniformly at random                                                                  |
+| **Static-Based (SB)**      | A policy that always picks the same fixed action regardless of state                                             |
+| **DPoS**                   | Delegated Proof of Stake — the consensus mechanism used; validators are selected by computational resources      |
+| **CSLR**                   | Cost-Security-Latency-Resource — the combined optimization objective of the system                               |
+| **ε-greedy**               | Exploration strategy: with probability ε take a random action, otherwise take the best known action              |
+| **Replay Buffer**          | A memory bank storing past experiences `(state, action, reward, next_state)` for random sampling during training |
+| **Soft Update**            | Slowly blending online network weights into the target network: `θ_target ← τ·θ_online + (1-τ)·θ_target`         |
 
 ---
 
-*Last updated: May 2026*
+_Last updated: May 2026_
