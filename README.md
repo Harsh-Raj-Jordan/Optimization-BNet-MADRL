@@ -20,7 +20,7 @@
 11. [Testing & Evaluation](#-testing--evaluation)
 12. [Saved Models](#-saved-models)
 13. [Troubleshooting](#-troubleshooting)
-14. [Research Background (For Juniors)](#-research-background-for-juniors)
+14. [Research Background](#-research-background-for-juniors)
 15. [Glossary](#-glossary)
 
 ---
