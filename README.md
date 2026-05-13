@@ -1,8 +1,5 @@
 # 🏥 BVSOP-MADRL — Blockchain Validator Selection & Optimization via Multi-Agent Deep Reinforcement Learning
 
-> **Based on:** _"Optimized Blockchain-Based Healthcare Framework Empowered by Mixed Multi-Agent Reinforcement Learning"_
-> Al-Marridi, A.Z., Mohamed, A., Erbad, A. — _Journal of Network and Computer Applications_, 224 (2024) 103834
-
 ---
 
 ## 📑 Table of Contents
